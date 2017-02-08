@@ -174,12 +174,26 @@
       })
     })
   </script>
-  
+
+  //
   <script type="text/javascript">
-    var switchSource = new EventSource("{{ url_for('myData')}}");
-    switchSource.onmessage = function(e) {
-      console.log(e.data);
-    }
+      var switchSource = new EventSource("{{ url_for('myData')}}");
+      switchSource.onmessage = function(e) {
+        console.log(e.data);
+      }
+    
+    
+    //var iotSource = new EventSource("{{ url_for('myData') }}");
+    //// intercept the incoming states from SSE
+    //iotsource.onmessasge = function(d) {
+    	//// console.log(e,data);
+      //var params = e.data.split(' ');
+      //updateSwitch(params[0]);
+      //updateLeds(1, params[1]);
+      //updateLeds(2, params[2]);
+      //updateLeds(3, params[3]);
+    //}
+    
   </script>
 
 </body>
