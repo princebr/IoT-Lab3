@@ -73,12 +73,13 @@ def myData():
     def get_state_values():
         while True:
             # return the yield results on each loop, but never exits while loop
-            raw_switch = pi_gpio.read_switch()
-            debounced_switch = str(db.debounce(raw_switch))
+            #raw_switch = pi_gpio.read_switch()
+            #debounced_switch = str(db.debounce(raw_switch))
+            switch = str(pi_gpio.read_switch())
             led_red = str(pi_gpio.get_led(1))
             led_grn = str(pi_gpio.get_led(2))
             led_blu = str(pi_gpio.get_led(3))
-            yield('data: {0} {1} {2} {3}\n\n'.format(debounced_switch, led_red, led_grn, led_blu))
+            yield('data: {0} {1} {2} {3}\n\n'.format(switch, led_red, led_grn, led_blu))
             time.sleep(0.1)
     return Response(get_state_values(), mimetype='text/event-stream')
 
