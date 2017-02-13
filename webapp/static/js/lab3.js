@@ -1,11 +1,15 @@
-      /* start executing only after document has loaded */
-      $(document).ready(function() {
-        /* establish global variables for LED status */
-        var led1;
-        var led2;
-        var led3;
-
-         var iotSource = new EventSource("{{ url_for('myData') }}"); 
+    // start executing only after document has loaded
+    $(document).ready(function() {
+      // establish global variables for LED status
+      var led1;
+      var led2;
+      var led3;
+   
+      // -----------------------------------------------------
+      // ---------------------- START HERE -------------------
+      
+    
+     		//var iotSource = new EventSource("{{ url_for('myData') }}"); 
         /* intercept the incoming states from SSE */
         iotSource.onmessage = function(e) {
           var params = e.data.split(' ');
@@ -54,5 +58,44 @@
             }
           }
         }
-      }
-      
+   
+    // Click Functions ...
+        $('#red_led_btn').click(function() {
+        if (led1 === "OFF") {
+          led1 = "ON";
+        } else {
+          led1 = "OFF";
+        }
+        var params = 'led=1&state=' + led1;
+        console.log('LED Command with params:' + params);
+        $.post('/ledcmd', params, function(data, status) {
+          console.log("Data: " + data + "\nStatus: " + status);
+        })
+      })
+
+      $('#grn_led_btn').click(function() {
+        if (led2 === "OFF") {
+          led2 = "ON";
+        } else {
+          led2 = "OFF";
+        }
+        var params = 'led=2&state=' + led2;
+        console.log('LED Command with params:' + params);
+        $.post('/ledcmd', params, function(data, status) {
+          console.log("Data: " + data + "\nStatus: " + status);
+        })
+      })
+
+      $('#blu_led_btn').click(function() {
+        if (led3 === "OFF") {
+          led3 = "ON";
+        } else {
+          led3 = "OFF";
+        }
+        var params = 'led=3&state=' + led3;
+        console.log('LED Command with params:' + params);
+        $.post('/ledcmd', params, function(data, status) {
+          console.log("Data: " + data + "\nStatus: " + status);
+        })
+      })
+    })
